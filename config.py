@@ -2,12 +2,21 @@ from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+import os
+import subprocess
 
+from libqtile import hook
 from core import keys, groups  # noqa: F401
 
 
 mod = "mod4"
 terminal = guess_terminal()
+
+
+@hook.subscribe.startup_once
+def start_once():
+    home = os.path.expanduser("~")
+    subprocess.call([home + "/.config/qtile/scripts/startup.sh"])
 
 
 layouts = [
