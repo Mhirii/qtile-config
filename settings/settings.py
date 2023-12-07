@@ -1,10 +1,12 @@
 from themes import current_theme
 
+theme = current_theme
+
 FONT = "JetbrainsMono Nerd Font"
 FONT_SIZE = 14
 FONT_BOLD = "JetbrainsMono Nerd Font Bold"
 FONT_SIZE_BIG = 18
-FOREGROUND = current_theme["light_1"]
+FOREGROUND = theme["light_1"]
 
 FONT_PARAMS = {
     "font": FONT,
@@ -17,6 +19,7 @@ apps = {
     "browser": "firedragon",
     "editor": "neovide",
     "visual": "code --password-store=gnome",
+    "telegram": "telegram-desktop",
     "screenshot": "flameshot full -p /home/mhiri/Pictures/Screenshots",
-    "dmenu": "dmenu_run -i -nb '#16161e' -nf '#7aa2f7' -sb '#7aa2f7' -sf '#16161e' -fn 'SpaceMono Nerd Font:bold:pixelsize:24'",
+    "dmenu": f"dmenu_run -i -nb {theme['dark_1']} -nf {theme['accent']} -sb {theme['accent']} -sf {theme['dark_1']} -fn 'JetbrainsMono Nerd Font:bold:pixelsize:24'",
 }

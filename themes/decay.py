@@ -1,7 +1,9 @@
 colors = {
-    "dark_0": "#101419",
-    "dark_1": "#1c252c",
-    "dark_2": "#384148",
+    "name": "decay",
+    "dark_0": "#020203",
+    "dark_1": "#0f1317",
+    "dark_2": "#181c1f",
+    "dark_3": "#1c252c",
     "gray_0": "#6b7078",
     "light_0": "#dee1e6",
     "light_1": "#e3e6eb",

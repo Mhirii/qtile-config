@@ -1,16 +1,12 @@
+import os
 from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
-import os
 import subprocess
 
 from libqtile import hook
-from core import keys, groups  # noqa: F401
-
-
-mod = "mod4"
-terminal = guess_terminal()
+from core import keybinds, groups_list, init_screens, init_layouts  # noqa: F401
 
 
 @hook.subscribe.startup_once
@@ -19,11 +15,15 @@ def start_once():
     subprocess.call([home + "/.config/qtile/scripts/startup.sh"])
 
 
-layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.Max(),
-    layout.MonadTall(),
-]
+mod = "mod4"
+terminal = guess_terminal()
+
+groups = groups_list
+keys = keybinds
+screens = init_screens()
+
+
+layouts = init_layouts()
 
 widget_defaults = dict(
     font="sans",
@@ -31,39 +31,6 @@ widget_defaults = dict(
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
-
-screens = [
-    Screen(
-        bottom=bar.Bar(
-            [
-                widget.CurrentLayout(),
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#bada55", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#bada55"),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
-                widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.QuickExit(),
-            ],
-            24,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
-        ),
-        # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
-        # By default we handle these events delayed to already improve performance, however your system might still be struggling
-        # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
-        # x11_drag_polling_rate = 60,
-    ),
-]
 
 # Drag floating layouts.
 mouse = [
@@ -84,7 +51,7 @@ dgroups_app_rules = []  # type: list
 follow_mouse_focus = True
 bring_front_click = False
 floats_kept_above = True
-cursor_warp = False
+cursor_warp = True
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True

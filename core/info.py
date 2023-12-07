@@ -8,4 +8,6 @@ scripts_dir = conf_dir + "scripts/"
 
 hostname = platform.node
 
-number_of_screens = int(subprocess.check_output([scripts_dir + "screens.sh"]))
+
+def number_of_screens():
+    return int(subprocess.check_output([scripts_dir + "screens.sh"]))

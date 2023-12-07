@@ -1,6 +1,6 @@
 from libqtile.config import Group, Key
 from libqtile.lazy import lazy
-from core.keys import keys, mod
+from core.keys import keybinds, mod
 
 from settings.matches import (
     browsers,
@@ -10,7 +10,7 @@ from settings.matches import (
     communication,
 )
 
-groups = [
+groups_list = [
     Group("1", label="1", layout="monadtall", matches=terminals),
     Group("2", label="2", layout="monadtall", matches=browsers),
     Group("3", label="3", layout="monadtall", matches=editors),
@@ -22,8 +22,8 @@ groups = [
     Group("9", label="9", layout="monadtall"),
 ]
 
-for index, i in enumerate(groups):
-    keys.extend(
+for index, i in enumerate(groups_list):
+    keybinds.extend(
         [
             Key(
                 [mod],

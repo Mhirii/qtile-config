@@ -1,19 +1,34 @@
-from utils.screens import number_of_screens
 from libqtile.config import Screen
-from libqtile import bar, widget
+from libqtile import bar
+from core.bars import init_widgets_list, init_secondary_widgets_list
+from core.info import number_of_screens
 
-screen = []
-for i in range(number_of_screens):
-    screen.append(
+
+def init_screens():
+    n = number_of_screens()
+    screens = [
         Screen(
             top=bar.Bar(
                 widgets=init_widgets_list(),
-                size=35,
+                size=25,
                 opacity=1,
-                # background="000000",
                 border_color="#282738",
                 border_width=[0, 0, 0, 0],
                 margin=[0, 0, 0, 0],
             ),
-        ),
-    )
+        )
+    ]
+    for i in range(n - 1):
+        screens.append(
+            Screen(
+                top=bar.Bar(
+                    widgets=init_secondary_widgets_list(),
+                    size=25,
+                    opacity=1,
+                    border_color="#282738",
+                    border_width=[0, 0, 0, 0],
+                    margin=[0, 0, 0, 0],
+                ),
+            )
+        )
+    return screens
