@@ -11,15 +11,15 @@ from settings.matches import (
 )
 
 groups_list = [
-    Group("1", label="1", layout="monadtall", matches=terminals),
-    Group("2", label="2", layout="monadtall", matches=browsers),
-    Group("3", label="3", layout="monadtall", matches=editors),
-    Group("4", label="4", layout="monadtall"),
-    Group("5", label="5", layout="monadtall", matches=communication),
-    Group("6", label="6", layout="monadtall", matches=music_players),
-    Group("7", label="7", layout="monadtall"),
-    Group("8", label="8", layout="monadtall"),
-    Group("9", label="9", layout="monadtall"),
+    Group("1", label="1", matches=terminals),
+    Group("2", label="2", matches=browsers),
+    Group("3", label="3", matches=editors),
+    Group("4", label="4"),
+    Group("5", label="5", matches=communication),
+    Group("6", label="6", matches=music_players),
+    Group("7", label="7"),
+    Group("8", label="8"),
+    Group("9", label="9"),
 ]
 
 for index, i in enumerate(groups_list):
