@@ -2,11 +2,13 @@ from themes import current_theme
 
 theme = current_theme
 
-FONT = "JetbrainsMono Nerd Font"
+FONT = "Monaspace Neon Medium"
 FONT_SIZE = 14
-FONT_BOLD = "JetbrainsMono Nerd Font Bold"
+FONT_BOLD = "Monaspace Neon Bold"
 FONT_SIZE_BIG = 18
 FOREGROUND = theme["light_1"]
+NERD_FONT = "JetbrainsMono Nerd Font"
+NERD_FONT_BOLD = "JetbrainsMono Nerd Font Bold"
 
 FONT_PARAMS = {
     "font": FONT,

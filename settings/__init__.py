@@ -5,6 +5,8 @@ from settings.settings import (
     FONT_PARAMS,
     FONT_SIZE,
     FONT_SIZE_BIG,
+    NERD_FONT,
+    NERD_FONT_BOLD,
     FOREGROUND,
     apps,
 )
@@ -19,6 +21,8 @@ __all__ = [
     "FONT_PARAMS",
     "FONT_SIZE",
     "FONT_SIZE_BIG",
+    "NERD_FONT",
+    "NERD_FONT_BOLD",
     "FOREGROUND",
     "apps",
 ]
