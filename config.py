@@ -11,6 +11,10 @@ from core import keybinds, groups_list, init_screens, init_layouts  # noqa: F401
 
 @hook.subscribe.startup_once
 def start_once():
+    """
+    A function that is executed once at the startup of the program.
+    It calls the 'startup.sh' script located in the '.config/qtile/scripts/' directory.
+    """
     home = os.path.expanduser("~")
     subprocess.call([home + "/.config/qtile/scripts/startup.sh"])
 
@@ -21,8 +25,6 @@ terminal = guess_terminal()
 groups = groups_list
 keys = keybinds
 screens = init_screens()
-
-
 layouts = init_layouts()
 
 widget_defaults = dict(
@@ -56,8 +58,6 @@ auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
 
-# If things like steam games want to auto-minimize themselves when losing
-# focus, should we respect this or not?
 auto_minimize = True
 
 # When using the Wayland backend, this can be used to configure input devices.
