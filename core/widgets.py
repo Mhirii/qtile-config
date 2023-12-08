@@ -1,62 +1,139 @@
 from libqtile import qtile, widget
-from settings import FONT, FONT_PARAMS
+from settings import FONT, FONT_PARAMS, FONT_BOLD, FONT_SIZE, FONT_SIZE_BIG, NERD_FONT
 from themes import current_theme
 
-GLYPH_SIZE = 25
+GLYPH_SIZE = 22
 theme = current_theme
 
 
 def separator_pipe(bg, fg):
+    """
+    Parameters:
+        background_color :str,
+        foreground_color :str
+    Returns:
+        libqtile.widget.TextBox.
+    """
     return widget.TextBox(
         text="",
         fontsize=GLYPH_SIZE,
         padding=0,
         background=bg,
         foreground=fg,
-        font=FONT,
+        font=NERD_FONT,
     )
 
 
 def separator_pipe_reverse(bg, fg):
+    """
+    Parameters:
+        background_color :str,
+        foreground_color :str
+    Returns:
+        libqtile.widget.TextBox.
+    """
     return widget.TextBox(
         text="",
         fontsize=GLYPH_SIZE,
         padding=0,
         background=bg,
         foreground=fg,
-        font=FONT,
+        font=NERD_FONT,
+    )
+
+
+def separator_arrow(bg, fg):
+    """
+    Parameters:
+        background_color :str,
+        foreground_color :str
+    Returns:
+        libqtile.widget.TextBox.
+    """
+    return widget.TextBox(
+        text="",
+        fontsize=FONT_SIZE_BIG,
+        padding=0,
+        background=bg,
+        foreground=fg,
+        font=NERD_FONT,
+    )
+
+
+def separator_arrow_reverse(bg, fg):
+    """
+    Parameters:
+        background_color :str,
+        foreground_color :str
+    Returns:
+        libqtile.widget.TextBox.
+    """
+    return widget.TextBox(
+        text="",
+        fontsize=FONT_SIZE_BIG,
+        padding=0,
+        background=bg,
+        foreground=fg,
+        font=NERD_FONT,
     )
 
 
 def slash(bg, fg):
+    """
+    parameters:
+        background_color :str,
+        foreground_color :str
+    Returns:
+        libqtile.widget.TextBox.
+    """
     return widget.TextBox(
         text="",
         fontsize=GLYPH_SIZE,
         padding=0,
         background=bg,
         foreground=fg,
-        font=FONT,
+        font=NERD_FONT,
     )
 
 
 def slash_reverse(bg, fg):
+    """
+    parameters:
+        background_color :str,
+        foreground_color :str
+    Returns:
+        libqtile.widget.TextBox.
+    """
     return widget.TextBox(
         text="",
         fontsize=GLYPH_SIZE,
         padding=0,
         background=bg,
         foreground=fg,
-        font=FONT,
+        font=NERD_FONT,
     )
 
 
 def default_spacer(bg):
+    """
+    parameters:
+        background_color :str
+    Returns:
+        widget.Spacer.
+    """
     return widget.Spacer(
         background=bg,
     )
 
 
 def spacer(bg, space):
+    """
+    Parameters:
+        background_color :str,
+        space :int
+    Returns:
+        widget.Spacer.
+    """
     return widget.Spacer(
         length=space,
         background=bg,
@@ -81,19 +158,21 @@ def memory_widget():
     )
 
 
-def date():
+def date(bg):
     return widget.Clock(
         format="%A %d ",
-        background=theme["dark_2"],
+        background=bg,
         **FONT_PARAMS,
     )
 
 
-def time():
+def time(bg, fg):
     return widget.Clock(
         format="%I:%M",
-        background=theme["dark_2"],
-        **FONT_PARAMS,
+        background=bg,
+        foreground=fg,
+        font=FONT_BOLD,
+        fontsize=FONT_SIZE,
     )
 
 
@@ -123,6 +202,8 @@ def volume_widget():
             background=theme["dark_1"],
             mouse_callbacks={"Button3": lambda: qtile.cmd_spawn("pavucontrol")},
             **FONT_PARAMS,
+            emoji=True,
+            emoji_list=["🔇", "🔈", "🔉", "🔊"],
         ),
     )
 

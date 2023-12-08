@@ -5,6 +5,12 @@ from core.info import number_of_screens
 
 
 def init_screens():
+    """
+    Initializes the screens for the application.
+
+    Returns:
+        list: A list of Screen objects representing the screens.
+    """
     n = number_of_screens()
     screens = [
         Screen(

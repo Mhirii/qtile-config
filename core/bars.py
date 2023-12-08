@@ -1,6 +1,7 @@
 from libqtile import widget, qtile
 
 from settings import FONT_PARAMS
+from settings.settings import FONT_BOLD, FONT_SIZE, FONT_SIZE_BIG, apps
 from themes import current_theme
 from core.widgets import (
     cpu_widget,
@@ -9,6 +10,8 @@ from core.widgets import (
     memory_widget,
     separator_pipe_reverse,
     slash,
+    separator_arrow,
+    separator_arrow_reverse,
     slash_reverse,
     spacer,
     separator_pipe,
@@ -17,17 +20,20 @@ from core.widgets import (
 
 theme = current_theme
 
-# ⭘
-LEFT_SIDE = (
-    spacer(theme["dark_3"], 8),
+GROUP_BLOCK = (
+    spacer(theme["accent"], 8),
     widget.TextBox(
-        **FONT_PARAMS,
-        text="⭘ ",
-        background=theme["dark_3"],
+        text="󰊠 ",
+        background=theme["accent"],
+        foreground=theme["dark_0"],
+        font=FONT_BOLD,
+        fontsize=FONT_SIZE,
+        mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(apps["dmenu"])},
     ),
-    separator_pipe(theme["dark_2"], theme["dark_3"]),
+    separator_pipe(theme["dark_2"], theme["accent"]),
     widget.GroupBox(
-        **FONT_PARAMS,
+        font=FONT_BOLD,
+        fontsize=FONT_SIZE,
         borderwidth=2,
         padding=2,
         highlight_method="block",
@@ -47,7 +53,10 @@ LEFT_SIDE = (
         # hide_unused=True,
         disable_drag=True,
     ),
-    separator_pipe(theme["dark_1"], theme["dark_2"]),
+    separator_arrow(theme["dark_1"], theme["dark_2"]),
+)
+
+LAYOUT_BLOCK = (
     widget.Spacer(
         length=8,
         background=theme["dark_1"],
@@ -65,15 +74,17 @@ LEFT_SIDE = (
     ),
     widget.Prompt(
         background=theme["dark_1"],
-        **FONT_PARAMS,
-        prompt=" ❯ ",
+        font=FONT_BOLD,
+        fontsize=FONT_SIZE,
+        foreground=theme["accent"],
+        prompt=" › ",
     ),
-    separator_pipe(theme["dark_0"], theme["dark_1"]),
+    separator_arrow(theme["dark_0"], theme["dark_1"]),
     default_spacer(theme["dark_0"]),
 )
-MIDDLE = (separator_pipe_reverse(theme["dark_2"], theme["dark_1"]),)
-RIGHT_SIDE = (
-    separator_pipe_reverse(theme["dark_0"], theme["dark_1"]),
+
+STATS_BLOCK = (
+    separator_arrow_reverse(theme["dark_0"], theme["dark_1"]),
     spacer(theme["dark_1"], 8),
     cpu_widget(),
     slash_reverse(theme["dark_1"], theme["dark_2"]),
@@ -85,29 +96,55 @@ RIGHT_SIDE = (
         mouse_callbacks={"Button3": lambda: qtile.cmd_spawn("pavucontrol")},
         volume_app="pavucontrol",
     ),
-    separator_pipe_reverse(theme["dark_1"], theme["dark_2"]),
-    date(),
-    time(),
-    spacer(theme["dark_2"], 8),
+)
+
+TIME_BLOCK = (
+    separator_arrow_reverse(theme["dark_2"], theme["dark_3"]),
+    date(theme["dark_3"]),
+    separator_pipe_reverse(theme["dark_3"], theme["accent"]),
+    time(theme["accent"], theme["dark_0"]),
+    spacer(theme["accent"], 8),
 )
 
 
 def init_widgets_list():
+    """
+    Initialize the widgets list.
+
+    Returns:
+        list: A list of widgets.
+    """
     return [
-        *LEFT_SIDE,
-        *RIGHT_SIDE,
-        separator_pipe_reverse(theme["dark_2"], theme["dark_3"]),
+        *GROUP_BLOCK,
+        *LAYOUT_BLOCK,
+        *STATS_BLOCK,
+        spacer(theme["dark_1"], 8),
+        separator_arrow_reverse(theme["dark_1"], theme["dark_2"]),
+        spacer(theme["dark_2"], 8),
         widget.Systray(
             padding=4,
-            background=theme["dark_3"],
+            background=theme["dark_2"],
             fontsize=2,
             icon_size=16,
         ),
+        spacer(theme["dark_2"], 8),
+        *TIME_BLOCK,
     ]
 
 
 def init_secondary_widgets_list():
-    return [*LEFT_SIDE, *MIDDLE, *RIGHT_SIDE]
+    """
+    Initializes the secondary widgets list by combining the elements of the LEFT_SIDE, MIDDLE, and RIGHT_SIDE lists.
+
+    Returns:
+        list: A list of widgets.
+    """
+    return [
+        *GROUP_BLOCK,
+        *LAYOUT_BLOCK,
+        *STATS_BLOCK,
+        *TIME_BLOCK,
+    ]
 
     # widgets_list = [
     #     # spacer(theme["dark_2"], 8),
