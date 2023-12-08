@@ -86,6 +86,12 @@ utils = [
     Key([mod], "d", lazy.spawn(apps["dmenu"]), desc="Launch dmenu"),
     Key([mod], "e", lazy.spawn(apps["editor"]), desc="Launch neovide"),
     Key([mod], "Print", lazy.spawn(apps["editor"]), desc="Launch neovide"),
+    Key(
+        [mod],
+        "v",
+        lazy.spawn("rofi -modi 'clipboard:greenclip print' -show clipboard"),
+        desc="Launch neovide",
+    ),
 ]
 
 keybinds = essentials
